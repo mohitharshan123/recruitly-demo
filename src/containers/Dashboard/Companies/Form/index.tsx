@@ -36,7 +36,11 @@ const FormDrawer: React.FC<{
 
   useEffect(() => {
     // TODO: Initial values not setting in the form, might have to be fixed in mantine.
-    if (!selectedCompany) return;
+    if (!selectedCompany) {
+      form.setValues(COMPANY_FORM_INITIAL_VALUES);
+      return;
+    }
+
     form.setValues(selectedCompany);
   }, [selectedCompany]);
 
