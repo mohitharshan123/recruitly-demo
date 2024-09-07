@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Card, Divider, Stack, Text } from "@mantine/core";
 
 import Header from "./Header";
-import { Company } from "../../../../types";
+import { Company, HeadOffice } from "../../../../types";
 import HeadOfficeInfo from "./HeadOfficeInfo";
 import { ROUTES } from "../../../../constants";
 import AdditionalDetails from "./AdditionalDetails";
@@ -25,11 +25,11 @@ const CompanyDetail: React.FC = () => {
     imageUrl = "",
     website = "",
     phone = "",
-    headOffice = {},
+    headOffice = {} as HeadOffice,
     ownerName = "",
     sectors = [],
     industries = [],
-  } = data as Company || {};
+  } = (data as Company) || {};
 
   const breadcrumbs = [
     ...COMPANIES_PAGE_BREADCRUMBS,

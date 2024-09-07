@@ -28,6 +28,7 @@ export type Company = {
   description: string | null;
   headOffice: HeadOffice;
   website: string;
+  ownerName: string;
   email: string;
   phone: string;
   industries: Category[];
