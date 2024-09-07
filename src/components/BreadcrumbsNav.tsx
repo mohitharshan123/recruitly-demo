@@ -30,7 +30,6 @@ const BreadcrumbsNav: React.FC<BreadcrumbsNavProps> = ({ breadcrumbs }) => {
             e.preventDefault();
             navigate(item.to);
           }}
-          href={item.to}
         >
           {item.title}
         </Anchor>

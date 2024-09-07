@@ -63,6 +63,7 @@ const CompaniesList = () => {
   return (
     <>
       <div>
+        <Flex justify="space-between" align="center">
         <BreadcrumbsNav breadcrumbs={COMPANIES_PAGE_BREADCRUMBS} />
         <Flex justify="flex-end" p={10}>
           <Group>
@@ -78,13 +79,11 @@ const CompaniesList = () => {
             </Button>
           </Group>
         </Flex>
-
-        <Grid gutter={{ base: 5, xs: "md", md: "xl", xl: 50 }}>
+        </Flex>
+        <div>
           {isLoading ? (
-            Array.from({ length: 20 }).map((_, index) => (
-              <Grid.Col span={{ base: 12, md: 6, lg: 3 }} key={index} p={40}>
-                <Skeleton mt={6} height={COMPANY_CARD_HEIGHT} />
-              </Grid.Col>
+            Array.from({ length: 10 }).map((_, index) => (
+              <Skeleton key={index} mt={6} height={40} />
             ))
           ) : (
             <div className="mt-10" style={{ height: 750 }}>
@@ -108,7 +107,7 @@ const CompaniesList = () => {
               </div>
             </div>
           )}
-        </Grid>
+        </div>
       </div>
       <FormDrawer
         selectedCompany={selectedCompany}

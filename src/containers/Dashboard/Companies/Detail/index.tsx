@@ -37,7 +37,7 @@ const CompanyDetail: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div className="mt-6">
       <BreadcrumbsNav breadcrumbs={breadcrumbs} />
       {isLoading ? (
         <DetailSkeleton />
