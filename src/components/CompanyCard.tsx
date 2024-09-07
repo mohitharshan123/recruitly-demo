@@ -17,7 +17,10 @@ import { DUMMY_IMAGE_COMPANY } from "../constants";
 type CompanyCardProps = Pick<
   Company,
   "name" | "imageUrl" | "website" | "phone" | "ownerName" | "sectors"
-> & { handleEditClick: () => void; handleCardClick?: () => void };
+> & {
+  handleEditClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleCardClick?: () => void;
+};
 
 /**
  * A component that displays a card with company details.

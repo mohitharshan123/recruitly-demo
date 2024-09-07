@@ -64,7 +64,10 @@ const CompaniesList = () => {
                     ownerName={company.ownerName}
                     website={company.website}
                     sectors={company.sectors}
-                    handleEditClick={() => {
+                    handleEditClick={(
+                      e: React.MouseEvent<HTMLButtonElement>
+                    ) => {
+                      e.stopPropagation();
                       setSelectedCompany(company);
                       open();
                     }}
