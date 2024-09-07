@@ -12,6 +12,7 @@ const CompaniesList = () => {
   const { data, isLoading } = useCompanies();
   const [searchQuery, setSearchQuery] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
 
   const filteredData = data?.filter((company: Company) =>
     company.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -42,31 +43,36 @@ const CompaniesList = () => {
                   <Skeleton mt={6} height={COMPANY_CARD_HEIGHT} />
                 </Grid.Col>
               ))
-            : filteredData?.map(
-                ({
-                  id,
-                  imageUrl,
-                  name,
-                  phone,
-                  ownerName,
-                  website,
-                  sectors,
-                }: Company) => (
-                  <Grid.Col span={{ base: 12, md: 6, lg: 3 }} key={id} p={40}>
-                    <CompanyCard
-                      imageUrl={imageUrl}
-                      name={name}
-                      phone={phone}
-                      ownerName={ownerName}
-                      website={website}
-                      sectors={sectors}
-                    />
-                  </Grid.Col>
-                )
-              )}
+            : filteredData?.map((company: Company) => (
+                <Grid.Col
+                  span={{ base: 12, md: 6, lg: 3 }}
+                  key={company.id}
+                  p={40}
+                >
+                  <CompanyCard
+                    imageUrl={company.imageUrl}
+                    name={company.name}
+                    phone={company.phone}
+                    ownerName={company.ownerName}
+                    website={company.website}
+                    sectors={company.sectors}
+                    handleEditClick={() => {
+                      setSelectedCompany(company);
+                      open();
+                    }}
+                  />
+                </Grid.Col>
+              ))}
         </Grid>
       </div>
-      <FormDrawer isOpen={opened} onClose={close}/>
+      <FormDrawer
+        selectedCompany={selectedCompany}
+        isOpen={opened}
+        onClose={() => {
+          close();
+          setSelectedCompany(null);
+        }}
+      />
     </>
   );
 };

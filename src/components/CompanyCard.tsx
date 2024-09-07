@@ -1,12 +1,22 @@
 import React from "react";
-import { Card, Image, Text, Group, Badge, Stack, Anchor } from "@mantine/core";
-import { IconPhoneCall } from "@tabler/icons-react";
+import {
+  Card,
+  Image,
+  Text,
+  Group,
+  Badge,
+  Stack,
+  Anchor,
+  Button,
+  Flex,
+} from "@mantine/core";
+import { IconPhoneCall, IconEdit } from "@tabler/icons-react";
 import { Company } from "../types";
 
 type CompanyCardProps = Pick<
   Company,
   "name" | "imageUrl" | "website" | "phone" | "ownerName" | "sectors"
->;
+> & { handleEditClick: () => void };
 
 /**
  * A component that displays a card with company details.
@@ -21,6 +31,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
   phone,
   ownerName,
   sectors,
+  handleEditClick,
 }) => {
   return (
     <Card
@@ -39,39 +50,50 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
           radius="md"
         />
       </Card.Section>
-
-      <Stack mt="sm">
-        <Anchor
-          href={website || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block h-full"
-        >
-          <Text fw={500} size="lg">
-            {name}
+      <Flex h="100%" direction="column" justify="space-between">
+        <Stack mt="sm">
+          <Anchor
+            href={website || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block h-full"
+          >
+            <Text fw={500} size="lg">
+              {name}
+            </Text>
+          </Anchor>
+          <Text size="xs" c="d" fw={700}>
+            {ownerName}
           </Text>
-        </Anchor>
-        <Text size="xs" c="d" fw={700}>
-          {ownerName}
-        </Text>
 
-        {phone && (
-          <Group>
-            <IconPhoneCall size={16} />
-            <Text size="sm">{phone}</Text>
-          </Group>
-        )}
+          {phone && (
+            <Group>
+              <IconPhoneCall size={16} />
+              <Text size="sm">{phone}</Text>
+            </Group>
+          )}
 
-        {sectors && sectors.length > 0 && (
-          <Group mt="md">
-            {sectors.map((sector, index) => (
-              <Badge key={index} color="gray" variant="light">
-                {sector.name}
-              </Badge>
-            ))}
-          </Group>
-        )}
-      </Stack>
+          {sectors && sectors.length > 0 && (
+            <Group mt="md">
+              {sectors.map((sector, index) => (
+                <Badge key={index} color="gray" variant="light">
+                  {sector.name}
+                </Badge>
+              ))}
+            </Group>
+          )}
+        </Stack>
+        <Button
+          onClick={handleEditClick}
+          variant="outline"
+          color="blue"
+          size="md"
+          mt={20}
+          leftSection={<IconEdit size={16} />}
+        >
+          Edit
+        </Button>
+      </Flex>
     </Card>
   );
 };

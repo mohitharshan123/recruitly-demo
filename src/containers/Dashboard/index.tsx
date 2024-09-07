@@ -1,20 +1,13 @@
-import { Grid, Group, Skeleton } from "@mantine/core";
+import { Route, Routes } from "react-router-dom";
+
+import { Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { AppShell, Burger } from "@mantine/core";
 
 import Navbar from "./Navbar";
-import { Company } from "../../types";
 import Logo from "../../assets/logo.svg";
-import CompanyCard from "../../components/CompanyCard";
-import { useCompanies } from "../../hooks/api/useCompanyApi";
-import {
-  COMPANY_CARD_HEIGHT,
-  HEADER_HEIGHT,
-  NAVBAR_WIDTH,
-  ROUTES,
-} from "../../constants";
-import { Route, Routes } from "react-router-dom";
 import CompaniesList from "./Companies/List";
+import { HEADER_HEIGHT, NAVBAR_WIDTH } from "../../constants";
 
 const Dashboard: React.FC = () => {
   const [isNavbarOpened, { toggle }] = useDisclosure();
