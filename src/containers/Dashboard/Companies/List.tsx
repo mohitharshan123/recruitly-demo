@@ -101,6 +101,9 @@ const CompaniesList = () => {
                   pageSizeOptions={PER_PAGE_OPTIONS}
                   rows={rows}
                   columns={columns ?? []}
+                  onRowClick={(row) =>
+                    navigate(`/dashboard/companies/${row.id}`)
+                  }
                 />
               </div>
             </div>
