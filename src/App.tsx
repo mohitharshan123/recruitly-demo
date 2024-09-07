@@ -20,7 +20,7 @@ const App = () => {
             element={<ProtectedRoute component={Dashboard} />}
           />
           <Route
-            path={ROUTES.dashboard}
+            path={ROUTES.root}
             element={<ProtectedRoute component={Dashboard} />}
           />
           <Route
