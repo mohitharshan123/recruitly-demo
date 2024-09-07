@@ -1,7 +1,4 @@
-import {
-  GridColDef,
-  GridRowParams,
-} from "@mui/x-data-grid";
+import { GridActionsColDef, GridColDef, GridRowParams } from "@mui/x-data-grid";
 
 import { Company } from "../../../types";
 import { CompanyListProps, DEFAULT_ROW_WIDTH } from "./List";
@@ -16,20 +13,21 @@ const columnMappings: {
 
 export const generateColumns = (
   data: Company[],
-  getActions: (params: GridRowParams) => void
+  getActions: (params: GridRowParams) => any
 ): GridColDef[] | null => {
   if (!data) return null;
-  const columns: GridColDef[] = [];
 
   const fields =
     data.length > 0 ? (Object.keys(data[0]) as (keyof CompanyListProps)[]) : [];
 
-  const actionColumn = {
+  const columns: GridColDef[] = [];
+
+  const actionColumn: GridActionsColDef = {
     field: "actions",
     type: "actions",
     headerName: "Actions",
     width: DEFAULT_ROW_WIDTH,
-    getActions,
+    getActions: (params: GridRowParams) => getActions(params),
   };
 
   for (const key of fields) {
