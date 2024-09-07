@@ -38,7 +38,7 @@ const FormDrawer: React.FC<{
     // TODO: Initial values not setting in the form, might have to be fixed in mantine.
     if (!selectedCompany) return;
     form.setValues(selectedCompany);
-  }, [selectedCompany, form]);
+  }, [selectedCompany]);
 
   const handleSubmit = (values: FormValues) =>
     createOrUpdateCompany(values, {
