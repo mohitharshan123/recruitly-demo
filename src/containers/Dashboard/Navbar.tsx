@@ -1,13 +1,14 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
+import { useLocalStorage } from "@mantine/hooks";
 import { IconHome2, IconLogout } from "@tabler/icons-react";
-import { rem, Stack, Tooltip, UnstyledButton } from "@mantine/core";
+import { rem, Stack, Tooltip, UnstyledButton, Text } from "@mantine/core";
 
 import { LINKS, SELECTED_LINK } from "./constants";
 import classes from "../../styles/navbar.module.css";
-import { useLocalStorage } from "@mantine/hooks";
 import { API_KEY_LS, ROUTES } from "../../constants";
-import { useNavigate } from "react-router-dom";
 
 type NavbarLinkProps = {
   icon: typeof IconHome2;
@@ -25,11 +26,13 @@ const NavbarLink = ({
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
       <UnstyledButton
+        mt={15}
         onClick={onClick}
         className={classes.link}
         data-active={active || undefined}
       >
-        <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+        <Icon style={{ width: rem(50), height: rem(30) }} stroke={1.5} />
+        <Text hiddenFrom="sm">{label}</Text>
       </UnstyledButton>
     </Tooltip>
   );

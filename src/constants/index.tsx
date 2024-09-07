@@ -7,3 +7,7 @@ export const ROUTES: Record<string, string> = {
 };
 
 export const API_BASE_URL: string = "https://api.recruitly.io/api/";
+
+export const HEADER_HEIGHT: number = 60;
+export const NAVBAR_WIDTH: number = 80;
+export const COMPANY_CARD_HEIGHT = 400;
