@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+# Recruitly Demo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a demo application created for Recruitly using React, TypeScript, and Vite. It interacts with the Recruitly API to showcase features related to company management.
 
-Currently, two official plugins are available:
+## Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+You can see a live demo of the application [here](https://recruitly-demo.vercel.app/).
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Display a list of companies
+- View detailed information for each company
+- Search and filter companies
+- Responsive design with modern UI components
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **React**: A JavaScript library for building user interfaces
+- **TypeScript**: A strongly typed programming language that builds on JavaScript
+- **Vite**: A fast build tool that provides a modern development environment
+- **Mantine**: A React component library for building modern user interfaces
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## API Documentation
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+The app interacts with the Recruitly API. You can find the API documentation [here](https://api.recruitly.io/v2/api-docs#/Company/Company%20Service_2).
