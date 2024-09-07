@@ -22,7 +22,7 @@ const CompaniesList = () => {
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
 
   const filteredData = data?.filter((company: Company) =>
-    company.name.toLowerCase().includes(searchQuery.toLowerCase())
+    company.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
