@@ -41,6 +41,9 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   "& .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:active": {
     color: "white",
   },
+  "& .MuiDataGrid-cell:hover": {
+    cursor: "pointer",
+  },
   "& .MuiPaginationItem-root": {
     borderRadius: 0,
     color: "white",
