@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -7,7 +7,8 @@ import { AppShell, Burger } from "@mantine/core";
 import Navbar from "./Navbar";
 import Logo from "../../assets/logo.svg";
 import CompaniesList from "./Companies/List";
-import { HEADER_HEIGHT, NAVBAR_WIDTH } from "../../constants";
+import { HEADER_HEIGHT, NAVBAR_WIDTH, ROUTES } from "../../constants";
+import CompanyDetail from "./Companies/Detail";
 
 const Dashboard: React.FC = () => {
   const [isNavbarOpened, { toggle }] = useDisclosure();
@@ -45,7 +46,12 @@ const Dashboard: React.FC = () => {
       </AppShell.Navbar>
       <AppShell.Main>
         <Routes>
-          <Route path="" Component={CompaniesList} />
+          <Route
+            path="/"
+            element={<Navigate to={`/dashboard${ROUTES.companies}`} />}
+          />
+          <Route path={ROUTES.companies} Component={CompaniesList} />
+          <Route path={ROUTES.company_detail} Component={CompanyDetail} />
         </Routes>
       </AppShell.Main>
     </AppShell>

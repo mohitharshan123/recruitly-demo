@@ -87,6 +87,10 @@ export type Analytics = {
   avgOfferToPlacementDays: number;
 };
 
+export type Category = {
+  id: string;
+  name: string;
+};
 export type Company = {
   id: string;
   reference: string;
@@ -102,8 +106,8 @@ export type Company = {
   linkedIn: string | null;
   twitter: string | null;
   analytics: Analytics;
-  industries: string[];
-  sectors: Array<{ id: string; name: string }>;
+  industries: Category[];
+  sectors: Category[];
   parent: string | null;
   companySizeCode: string;
   companyTypeId: string;

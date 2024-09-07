@@ -15,3 +15,8 @@ export const useCreateOrUpdateCompany = () =>
       queryClient.invalidateQueries([QUERY_KEYS.companies]);
     },
   });
+
+export const useGetCompany = (id: string) =>
+  useQuery([QUERY_KEYS.companies, id], () => companiesApi.get(id), {
+    select: (res) => res?.data,
+  });

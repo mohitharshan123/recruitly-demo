@@ -1,14 +1,21 @@
-import React, { useState } from "react";
-import { Grid, Skeleton, TextInput, Button, Group, Flex } from "@mantine/core";
+import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus, IconSearch } from "@tabler/icons-react";
+import { Button, Flex, Grid, Group, Skeleton, TextInput } from "@mantine/core";
+
+import FormDrawer from "./Form";
 import { Company } from "../../../types";
+import { COMPANY_CARD_HEIGHT } from "../../../constants";
+import { COMPANIES_PAGE_BREADCRUMBS } from "./constants";
 import CompanyCard from "../../../components/CompanyCard";
 import { useCompanies } from "../../../hooks/api/useCompanyApi";
-import { COMPANY_CARD_HEIGHT } from "../../../constants";
-import FormDrawer from "./Form";
+import BreadcrumbsNav from "../../../components/BreadcrumbsNav";
 
 const CompaniesList = () => {
+  const navigate = useNavigate();
   const { data, isLoading } = useCompanies();
   const [searchQuery, setSearchQuery] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
@@ -21,7 +28,8 @@ const CompaniesList = () => {
   return (
     <>
       <div>
-        <Flex justify="flex-end">
+        <BreadcrumbsNav breadcrumbs={COMPANIES_PAGE_BREADCRUMBS} />
+        <Flex justify="flex-end" p={10}>
           <Group>
             <TextInput
               placeholder="Search companies"
@@ -60,6 +68,9 @@ const CompaniesList = () => {
                       setSelectedCompany(company);
                       open();
                     }}
+                    handleCardClick={() =>
+                      navigate(`/dashboard/companies/${company.id}`)
+                    }
                   />
                 </Grid.Col>
               ))}

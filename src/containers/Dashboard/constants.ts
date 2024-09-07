@@ -1,5 +1,6 @@
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { IconGauge, IconProps, Icon } from "@tabler/icons-react";
+import { ROUTES } from "../../constants";
 
 export enum SELECTED_LINK {
   DASHBOARD = 0,
@@ -9,4 +10,7 @@ export enum SELECTED_LINK {
 export const LINKS: Array<{
   icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
   label: string;
-}> = [{ icon: IconGauge, label: "Companies" }];
+  to: string;
+}> = [
+  { icon: IconGauge, label: "Companies", to: `/dashboard${ROUTES.companies}` },
+];

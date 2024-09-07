@@ -12,11 +12,12 @@ import {
 } from "@mantine/core";
 import { IconPhoneCall, IconEdit } from "@tabler/icons-react";
 import { Company } from "../types";
+import { DUMMY_IMAGE_COMPANY } from "../constants";
 
 type CompanyCardProps = Pick<
   Company,
   "name" | "imageUrl" | "website" | "phone" | "ownerName" | "sectors"
-> & { handleEditClick: () => void };
+> & { handleEditClick: () => void; handleCardClick?: () => void };
 
 /**
  * A component that displays a card with company details.
@@ -32,6 +33,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
   ownerName,
   sectors,
   handleEditClick,
+  handleCardClick = () => {},
 }) => {
   return (
     <Card
@@ -39,16 +41,10 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
       radius="md"
       withBorder
       className="cursor-pointer relative h-full"
+      onClick={handleCardClick}
     >
       <Card.Section>
-        <Image
-          src={
-            imageUrl ||
-            "https://www.shutterstock.com/image-photo/angled-view-large-window-covered-600nw-2277326565.jpg"
-          }
-          alt={name}
-          radius="md"
-        />
+        <Image src={imageUrl || DUMMY_IMAGE_COMPANY} alt={name} radius="md" />
       </Card.Section>
       <Flex h="100%" direction="column" justify="space-between">
         <Stack mt="sm">
@@ -57,6 +53,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             className="block h-full"
+            onClick={(e) => e.stopPropagation()}
           >
             <Text fw={500} size="lg">
               {name}

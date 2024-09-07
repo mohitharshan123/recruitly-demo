@@ -1,12 +1,10 @@
-import { useState } from "react";
-
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useLocalStorage } from "@mantine/hooks";
 import { IconHome2, IconLogout } from "@tabler/icons-react";
 import { rem, Stack, Tooltip, UnstyledButton, Text } from "@mantine/core";
 
-import { LINKS, SELECTED_LINK } from "./constants";
+import { LINKS } from "./constants";
 import classes from "../../styles/navbar.module.css";
 import { API_KEY_LS, ROUTES } from "../../constants";
 
@@ -40,15 +38,20 @@ const NavbarLink = ({
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const [_, __, removeApiKey] = useLocalStorage({ key: API_KEY_LS });
-  const [active, setActive] = useState(SELECTED_LINK.DASHBOARD);
+
+  const active = LINKS.findIndex((link) => pathname.startsWith(link.to));
 
   const links = LINKS.map((link, index) => (
     <NavbarLink
       {...link}
       key={link.label}
       active={index === active}
-      onClick={() => setActive(index)}
+      onClick={() => {
+        navigate(link.to);
+      }}
     />
   ));
 
