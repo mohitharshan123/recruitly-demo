@@ -46,10 +46,7 @@ const Dashboard: React.FC = () => {
       </AppShell.Navbar>
       <AppShell.Main>
         <Routes>
-          <Route
-            path="/"
-            element={<Navigate to={`/dashboard${ROUTES.companies}`} />}
-          />
+          <Route path="/" element={<Navigate to={`/dashboard${ROUTES.companies}`} />} />
           <Route path={ROUTES.companies} Component={CompaniesList} />
           <Route path={ROUTES.company_detail} Component={CompanyDetail} />
         </Routes>
