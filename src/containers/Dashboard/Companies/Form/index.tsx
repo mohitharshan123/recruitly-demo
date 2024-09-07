@@ -26,7 +26,7 @@ const FormDrawer: React.FC<{
 }> = ({ isOpen, onClose, selectedCompany }) => {
   const isEdit = !!selectedCompany;
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     initialValues: COMPANY_FORM_INITIAL_VALUES,
     validate: zodResolver(COMPANY_VALIDATION_SCHEMA),
   });
@@ -38,7 +38,7 @@ const FormDrawer: React.FC<{
     // TODO: Initial values not setting in the form, might have to be fixed in mantine.
     if (!selectedCompany) return;
     form.setValues(selectedCompany);
-  }, [selectedCompany]);
+  }, [selectedCompany, form]);
 
   const handleSubmit = (values: FormValues) =>
     createOrUpdateCompany(values, {

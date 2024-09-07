@@ -11,7 +11,7 @@ export const COMPANY_VALIDATION_SCHEMA = z.object({
   description: z.string().optional().nullable(),
 });
 
-export const COMPANY_FORM_INITIAL_VALUES: any = {
+export const COMPANY_FORM_INITIAL_VALUES = {
   id: "",
   name: "",
   imageUrl: "",

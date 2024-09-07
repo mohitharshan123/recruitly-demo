@@ -32,6 +32,7 @@ const AuthenticationForm = (props: PaperProps) => {
     validate: AUTH_VALIDATOR,
   });
 
+  // eslint-disable-next-line  @typescript-eslint/no-unused-vars
   const [_, setApiKey] = useLocalStorage({
     key: API_KEY_LS,
   });

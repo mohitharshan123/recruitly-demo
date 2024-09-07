@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClientProvider } from "react-query";
 import { ROUTES } from "./constants";
 import Dashboard from "./containers/Dashboard";
 import AuthenticationForm from "./containers/Authentication";
@@ -7,8 +7,7 @@ import AuthenticationForm from "./containers/Authentication";
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
-
-export const queryClient = new QueryClient();
+import { queryClient } from "./queryClient";
 
 const App = () => {
   return (

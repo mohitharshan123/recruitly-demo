@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "react-query";
 import { QUERY_KEYS } from "./queryKeys";
 
 import companiesApi from "../../api/companies";
-import { queryClient } from "../../App";
+import { queryClient } from "../../queryClient";
 
 export const useCompanies = () =>
   useQuery([QUERY_KEYS.companies], companiesApi.list, {

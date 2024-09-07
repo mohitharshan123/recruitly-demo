@@ -40,6 +40,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  // eslint-disable-next-line  @typescript-eslint/no-unused-vars
   const [_, __, removeApiKey] = useLocalStorage({ key: API_KEY_LS });
 
   const active = LINKS.findIndex((link) => pathname.startsWith(link.to));
