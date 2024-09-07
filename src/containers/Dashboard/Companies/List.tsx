@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEdit } from "@tabler/icons-react";
 import { IconPlus, IconSearch } from "@tabler/icons-react";
-import { Button, Flex, Grid, Group, Skeleton, TextInput } from "@mantine/core";
+import { Button, Flex, Group, Skeleton, TextInput } from "@mantine/core";
 import {
   GridActionsCellItem,
   GridColDef,
@@ -16,7 +16,6 @@ import {
 import FormDrawer from "./Form";
 import { Company } from "../../../types";
 import { generateColumns } from "./utils";
-import { COMPANY_CARD_HEIGHT } from "../../../constants";
 import { COMPANIES_PAGE_BREADCRUMBS } from "./constants";
 import { useCompanies } from "../../../hooks/api/useCompanyApi";
 import BreadcrumbsNav from "../../../components/BreadcrumbsNav";
