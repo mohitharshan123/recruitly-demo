@@ -22,4 +22,4 @@ You can see a live demo of the application [here](https://recruitly-demo.vercel.
 
 ## API Documentation
 
-The app interacts with the Recruitly API. You can find the API documentation [here](https://api.recruitly.io/v2/api-docs#/Company/Company%20Service_2).
+The app interacts with the Recruitly API. You can find the API documentation [here](https://petstore.swagger.io/?url=https://api.recruitly.io/v2/api-docs#/Company/Company%20Service_2).
