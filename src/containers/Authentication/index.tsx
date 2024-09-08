@@ -7,6 +7,7 @@ import {
   Divider,
   Flex,
   Group,
+  LoadingOverlay,
   Paper,
   PaperProps,
   PasswordInput,
@@ -20,6 +21,7 @@ import GoogleIcon from "../../assets/Google.svg";
 import IconButton from "../../components/IconButton";
 import { API_KEY, API_KEY_LS, ROUTES } from "../../constants";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const AuthenticationForm = (props: PaperProps) => {
   const navigate = useNavigate();
@@ -32,13 +34,31 @@ const AuthenticationForm = (props: PaperProps) => {
     validate: AUTH_VALIDATOR,
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // eslint-disable-next-line  @typescript-eslint/no-unused-vars
   const [_, setApiKey] = useLocalStorage({
     key: API_KEY_LS,
   });
 
+  const handleSubmit = () => {
+    setApiKey(API_KEY);
+    setIsSubmitting(true);
+    // Showing a dummy loading state for effect
+    setTimeout(() => {
+      setIsSubmitting(false);
+      navigate(ROUTES.dashboard);
+    }, 2000);
+  };
+
   return (
     <Flex justify="center" align="center" direction="row" h="100vh">
+      <LoadingOverlay
+        visible={isSubmitting}
+        zIndex={1000}
+        overlayProps={{ radius: "sm", blur: 2 }}
+        loaderProps={{ color: "pink", type: "bars" }}
+      />
       <Paper radius="md" p="xl" withBorder {...props}>
         <Text size="lg" fw={500}>
           Welcome to Recruitly
@@ -77,12 +97,7 @@ const AuthenticationForm = (props: PaperProps) => {
           my="lg"
         />
 
-        <form
-          onSubmit={form.onSubmit(() => {
-            setApiKey(API_KEY);
-            navigate(ROUTES.dashboard);
-          })}
-        >
+        <form onSubmit={form.onSubmit(handleSubmit)}>
           <Stack>
             {authType === AUTH_TYPES.REGISTER && (
               <TextInput
