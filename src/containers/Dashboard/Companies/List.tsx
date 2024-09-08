@@ -20,7 +20,13 @@ import { COMPANIES_PAGE_BREADCRUMBS } from "./constants";
 import { useCompanies } from "../../../hooks/api/useCompanyApi";
 import BreadcrumbsNav from "../../../components/BreadcrumbsNav";
 import StyledDataGrid from "../../../components/StyledDataGrid";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
+});
 export type CompanyListProps = Pick<Company, "name" | "phone" | "ownerName">;
 
 export const DEFAULT_ROW_WIDTH = 300;
@@ -60,24 +66,24 @@ const CompaniesList = () => {
   );
 
   return (
-    <>
+    <ThemeProvider {...{ theme }}>
       <div>
         <Flex justify="space-between" align="center">
-        <BreadcrumbsNav breadcrumbs={COMPANIES_PAGE_BREADCRUMBS} />
-        <Flex justify="flex-end" p={10}>
-          <Group>
-            <TextInput
-              placeholder="Search companies"
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.currentTarget.value)}
-              leftSection={<IconSearch size={16} />}
-              style={{ width: 250 }}
-            />
-            <Button leftSection={<IconPlus />} onClick={open}>
-              Add Company
-            </Button>
-          </Group>
-        </Flex>
+          <BreadcrumbsNav breadcrumbs={COMPANIES_PAGE_BREADCRUMBS} />
+          <Flex justify="flex-end" p={10}>
+            <Group>
+              <TextInput
+                placeholder="Search companies"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.currentTarget.value)}
+                leftSection={<IconSearch size={16} />}
+                style={{ width: 250 }}
+              />
+              <Button leftSection={<IconPlus />} onClick={open}>
+                Add Company
+              </Button>
+            </Group>
+          </Flex>
         </Flex>
         <div>
           {isLoading ? (
@@ -85,10 +91,10 @@ const CompaniesList = () => {
               <Skeleton key={index} mt={6} height={40} />
             ))
           ) : (
-            <div className="mt-10" style={{ height: 750 }}>
+            <div className="mt-10" style={{ width: "100%" }}>
               <div
                 className="m-10"
-                style={{ height: 660, width: DEFAULT_ROW_WIDTH * 4 }}
+                style={{ height: 660, width: "calc(100% - 150px)" }}
               >
                 <StyledDataGrid
                   initialState={{
@@ -116,7 +122,7 @@ const CompaniesList = () => {
           setSelectedCompany(null);
         }}
       />
-    </>
+    </ThemeProvider>
   );
 };
 
