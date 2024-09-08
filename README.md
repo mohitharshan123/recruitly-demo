@@ -20,6 +20,10 @@ You can see a live demo of the application [here](https://recruitly-demo.vercel.
 - **Vite**: A fast build tool that provides a modern development environment
 - **Mantine**: A React component library for building modern user interfaces
 
+## CI Integration
+
+This project is configured with Continuous Integration (CI) to ensure automated testing and quality assurance. CI processes are set up to run tests, lint code, and build the project on every push ensuring code quality and reliability.
+
 ## API Documentation
 
 The app interacts with the Recruitly API. You can find the API documentation [here](https://petstore.swagger.io/?url=https://api.recruitly.io/v2/api-docs#/Company/Company%20Service_2).
