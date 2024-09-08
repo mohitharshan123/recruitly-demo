@@ -3,12 +3,12 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDisclosure } from "@mantine/hooks";
-import { IconEdit } from "@tabler/icons-react";
+import { IconEdit, IconExternalLink } from "@tabler/icons-react";
 import { IconPlus, IconSearch } from "@tabler/icons-react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, Flex, Group, Skeleton, TextInput } from "@mantine/core";
 import {
   GridActionsCellItem,
-  GridColDef,
   GridRowParams,
   GridRowsProp,
 } from "@mui/x-data-grid";
@@ -20,7 +20,6 @@ import { COMPANIES_PAGE_BREADCRUMBS } from "./constants";
 import { useCompanies } from "../../../hooks/api/useCompanyApi";
 import BreadcrumbsNav from "../../../components/BreadcrumbsNav";
 import StyledDataGrid from "../../../components/StyledDataGrid";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   colorSchemes: {
@@ -47,28 +46,44 @@ const CompaniesList = () => {
 
   const rows: GridRowsProp = filteredData;
 
-  const columns: GridColDef[] | null = useMemo(
+  const columns = useMemo(
     () =>
-      generateColumns(data, (params: GridRowParams) => [
-        <GridActionsCellItem
-          icon={<IconEdit color="white" />}
-          onClick={() => {
-            const selectedCompany = data?.find(
-              (company: Company) => company.id == params.id
-            );
-            setSelectedCompany(selectedCompany);
-            open();
-          }}
-          label="Edit"
-        />,
-      ]),
-    [data]
+      generateColumns(data, (params: GridRowParams) => {
+        const selectedCompany = data?.find(
+          (company: Company) => company.id === params.id
+        );
+        return [
+          <GridActionsCellItem
+            icon={<IconEdit color="grey" />}
+            onClick={() => {
+              setSelectedCompany(selectedCompany);
+              open();
+            }}
+            label="Edit"
+          />,
+          <GridActionsCellItem
+            icon={<IconExternalLink color="grey" />}
+            onClick={() => {
+              if (selectedCompany?.website) {
+                window.open(selectedCompany.website, "_blank");
+              }
+            }}
+            label="Visit website"
+          />,
+        ];
+      }),
+    [data, theme.palette.text.primary]
   );
 
   return (
     <ThemeProvider {...{ theme }}>
       <div>
-        <Flex justify="space-between" align="center">
+        <Flex
+          direction={{ base: "column", lg: "row" }}
+          justify={{ base: "flex-start", lg: "space-between" }}
+          align="center"
+          p={10}
+        >
           <BreadcrumbsNav breadcrumbs={COMPANIES_PAGE_BREADCRUMBS} />
           <Flex justify="flex-end" p={10}>
             <Group>
@@ -87,9 +102,16 @@ const CompaniesList = () => {
         </Flex>
         <div>
           {isLoading ? (
-            Array.from({ length: 10 }).map((_, index) => (
-              <Skeleton key={index} mt={6} height={40} />
-            ))
+            <div className="mt-10 ml-10">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  mt={25}
+                  height={40}
+                  width="calc(100% - 150px)"
+                />
+              ))}
+            </div>
           ) : (
             <div className="mt-10" style={{ width: "100%" }}>
               <div

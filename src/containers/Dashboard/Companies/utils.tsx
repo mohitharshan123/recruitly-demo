@@ -20,6 +20,8 @@ export const generateColumns = (
   const fields =
     data.length > 0 ? (Object.keys(data[0]) as (keyof CompanyListProps)[]) : [];
 
+  console.log({ fields });
+
   const columns: GridColDef[] = [];
 
   const actionColumn: GridActionsColDef = {
