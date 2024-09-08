@@ -10,10 +10,11 @@ const columnMappings: {
   phone: "Phone",
   ownerName: "Owner Name",
 };
+type GetActions = (params: GridRowParams<Company>) => React.ReactElement[];
 
 export const generateColumns = (
   data: Company[],
-  getActions: (params: GridRowParams) => any
+  getActions: GetActions
 ): GridColDef[] | null => {
   if (!data) return null;
 
