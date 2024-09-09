@@ -1,10 +1,10 @@
 import { jest } from "@jest/globals";
-import { MantineProvider } from "@mantine/core";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 
 import BreadcrumbsNav from "../../components/BreadcrumbsNav";
 
 import "@testing-library/jest-dom";
+import { renderWithMantineProvider } from ".";
 const mockNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
@@ -18,11 +18,7 @@ describe("BreadcrumbsNav", () => {
   ];
 
   test("renders breadcrumbs correctly", () => {
-    render(
-      <MantineProvider>
-        <BreadcrumbsNav breadcrumbs={breadcrumbs} />
-      </MantineProvider>
-    );
+    renderWithMantineProvider(<BreadcrumbsNav breadcrumbs={breadcrumbs} />);
 
     breadcrumbs.forEach((breadcrumb) => {
       expect(screen.getByText(breadcrumb.title)).toBeInTheDocument();
@@ -30,11 +26,7 @@ describe("BreadcrumbsNav", () => {
   });
 
   test("navigates to the correct route when breadcrumb is clicked", () => {
-    render(
-      <MantineProvider>
-        <BreadcrumbsNav breadcrumbs={breadcrumbs} />
-      </MantineProvider>
-    );
+    renderWithMantineProvider(<BreadcrumbsNav breadcrumbs={breadcrumbs} />);
 
     breadcrumbs.forEach((breadcrumb) => {
       const breadcrumbElement = screen.getByText(breadcrumb.title);
