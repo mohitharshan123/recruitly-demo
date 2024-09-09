@@ -19,4 +19,5 @@ export const useCreateOrUpdateCompany = () =>
 export const useGetCompany = (id: string) =>
   useQuery([QUERY_KEYS.companies, id], () => companiesApi.get(id), {
     select: (res) => res?.data,
+    enabled: !!id,
   });

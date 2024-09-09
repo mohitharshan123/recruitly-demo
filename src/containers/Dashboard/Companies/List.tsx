@@ -31,14 +31,16 @@ export type CompanyListProps = Pick<Company, "name" | "phone" | "ownerName">;
 export const DEFAULT_ROW_WIDTH = 300;
 const DEFAULT_PAGE_SIZE = 12;
 
-const PER_PAGE_OPTIONS = [5, 10, 25];
+const PER_PAGE_OPTIONS = [5, 12, 25];
 
 const CompaniesList = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useCompanies();
   const [searchQuery, setSearchQuery] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
-  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
+  const [selectedCompanyId, setSelectedCompanyId] = useState<string | null>(
+    null
+  );
 
   const filteredData = data?.filter((company: Company) =>
     company.name?.toLowerCase().includes(searchQuery.toLowerCase())
@@ -49,14 +51,11 @@ const CompaniesList = () => {
   const columns = useMemo(
     () =>
       generateColumns(data, (params: GridRowParams) => {
-        const selectedCompany = data?.find(
-          (company: Company) => company.id === params.id
-        );
         return [
           <GridActionsCellItem
             icon={<IconEdit color="grey" />}
             onClick={() => {
-              setSelectedCompany(selectedCompany);
+              setSelectedCompanyId(params.row?.id);
               open();
             }}
             label="Edit"
@@ -64,8 +63,8 @@ const CompaniesList = () => {
           <GridActionsCellItem
             icon={<IconExternalLink color="grey" />}
             onClick={() => {
-              if (selectedCompany?.website) {
-                window.open(selectedCompany.website, "_blank");
+              if (params?.row?.website) {
+                window.open(params.row.website, "_blank");
               }
             }}
             label="Visit website"
@@ -137,11 +136,11 @@ const CompaniesList = () => {
         </div>
       </div>
       <FormDrawer
-        selectedCompany={selectedCompany}
+        selectedCompanyId={selectedCompanyId}
         isOpen={opened}
         onClose={() => {
           close();
-          setSelectedCompany(null);
+          setSelectedCompanyId(null);
         }}
       />
     </ThemeProvider>

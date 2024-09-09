@@ -12,19 +12,24 @@ import {
   Loader,
 } from "@mantine/core";
 
-import { useCreateOrUpdateCompany } from "../../../../hooks/api/useCompanyApi";
+import {
+  useCreateOrUpdateCompany,
+  useGetCompany,
+} from "../../../../hooks/api/useCompanyApi";
 import {
   COMPANY_FORM_INITIAL_VALUES,
   COMPANY_VALIDATION_SCHEMA,
   FormValues,
 } from "./constants";
+import { transformCompanyToFormValues } from "./utils";
 
 const FormDrawer: React.FC<{
   isOpen: boolean;
   onClose: () => void;
-  selectedCompany: FormValues | null;
-}> = ({ isOpen, onClose, selectedCompany }) => {
-  const isEdit = !!selectedCompany;
+  selectedCompanyId: string | null;
+}> = ({ isOpen, onClose, selectedCompanyId }) => {
+  const isEdit = !!selectedCompanyId;
+  const { data: companyToEdit } = useGetCompany(selectedCompanyId || "");
 
   const form = useForm({
     initialValues: COMPANY_FORM_INITIAL_VALUES,
@@ -35,14 +40,14 @@ const FormDrawer: React.FC<{
     useCreateOrUpdateCompany();
 
   useEffect(() => {
-    // TODO: Initial values not setting in the form, might have to be fixed in mantine.
-    if (!selectedCompany) {
+    if (!selectedCompanyId) {
       form.setValues(COMPANY_FORM_INITIAL_VALUES);
       return;
     }
-
-    form.setValues(selectedCompany);
-  }, [selectedCompany]);
+    const companyToEditFormValues = transformCompanyToFormValues(companyToEdit);
+    form.setInitialValues(companyToEditFormValues);
+    form.setValues(companyToEditFormValues);
+  }, [companyToEdit]);
 
   const handleSubmit = (values: FormValues) =>
     createOrUpdateCompany(values, {
